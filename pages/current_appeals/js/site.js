@@ -236,18 +236,20 @@ function updateKeyFigures(data){
 	var totalfunding = 0;
 	var totalDREF = 0;
 	var totalappeal = 0;
+	var totalBudget = 0;
 	var totalBen = 0;
 	data.forEach(function(d,i){
-		totalappeals+=parseFloat(d['#meta+value']);
-		totalfunding+=parseFloat(d['#meta+funding']);
+		totalBudget+=parseFloat(d['#meta+value']);
 		totalBen+=parseFloat(d['#targeted']);
-		if(d['#meta+type']=='DREF'){
+		if(d['#severity']=='Minor Emergency'){
 			totalDREF +=1;
 		} else {
 			totalappeal +=1;
+			totalappeals+=parseFloat(d['#meta+value']);
+			totalfunding+=parseFloat(d['#meta+funding']);
 		}
 	});
-	$('#totalappeals').html(niceFormatNumber(totalappeals,true));
+	$('#totalappeals').html(niceFormatNumber(totalBudget,true));
 	$('#totalbens').html(niceFormatNumber(totalBen,true));
 	$('#totalea').html(totalappeal);
 	$('#totaldref').html(totalDREF);
