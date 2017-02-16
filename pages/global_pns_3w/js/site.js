@@ -156,7 +156,7 @@ $('#loadingmodal').modal('show');
 
 var dataCall = $.ajax({ 
     type: 'GET', 
-    url: 'https://proxy.hxlstandard.org/data.json?strip-headers=on&url=https%3A//docs.google.com/spreadsheets/d/1Yq9uFEM0FKFDfhi7rlkhU2L6TmNOSky91MZSFn24F7Y/edit%23gid%3D0',
+    url: 'https://proxy.hxlstandard.org/data.json?force=on&url=https%3A//docs.google.com/spreadsheets/d/1glxR_Cm8PH3532pPEdsoR47TBVWHIPMwQ_VKi6ukwRU/edit%23gid%3D0&strip-headers=on',
     dataType: 'json',
 });
 
