@@ -1,23 +1,25 @@
 function generateKeyFigs(data,override){
 	$('.appeal_name').html(data['#crisis+name']);
 	$('#beneficiaries').append('<p class="keyfigure">'+niceFormatNumber(data['#targeted'])+'</p>');
-	console.log(override);
 	if(!override){
-		var coverage = parseInt(data['#meta+coverage'].substring(-1))*0.01;
-		createPie('#coverage',220,40,coverage,0);
-		$('#funding').append('<p class="keyfigure">'+niceFormatNumber(data['#meta+funding'])+' (CHF)</p>');
-		$('#appeal_amount').append('<p class="keyfigure">'+niceFormatNumber(data['#meta+value'])+' (CHF)</p>');	
+		if(data['#meta+coverage']==""){
+			$('#funding').remove();
+			$('#coverage').remove();
+			$('#appeal_amount').append('<p class="keyfigure">'+niceFormatNumber(data['#meta+value'])+' (CHF)</p>');
+		} else {
+			var coverage = parseInt(data['#meta+coverage'].substring(-1))*0.01;
+			createPie('#coverage',220,40,coverage,0);
+			$('#funding').append('<p class="keyfigure">'+niceFormatNumber(data['#meta+funding'])+' (CHF)</p>');
+			$('#appeal_amount').append('<p class="keyfigure">'+niceFormatNumber(data['#meta+value'])+' (CHF)</p>');
+		}
 	} else {
 		var soft = 1;
 		var hard = 1;
 
 		override.forEach(function(d){
-			console.log(d);
 			if(d['#meta+key']=='soft plus hard funding'){soft = d['#meta+value']}
 			if(d['#meta+key']=='hard funding'){hard = d['#meta+value']}
 		});
-		console.log(hard);
-		console.log(soft);
 		var hardcoverage = parseInt(hard)/parseInt(data['#meta+value']);
 		var softcoverage = parseInt(soft)/parseInt(data['#meta+value']);
 		createPie('#coverage',220,40,hardcoverage,softcoverage);
@@ -86,7 +88,7 @@ function processHash(){
 	    url: '/data/worldmap.json', 
 	    dataType: 'json'
 	});
-	var url = 'https://beta.proxy.hxlstandard.org/data.json?filter01=select&select-query01-01=%23meta%2Bid%3D'+appealid+'&url=https%3A//docs.google.com/spreadsheets/d/1rJ5gt-JaburVcfzTeNmLglEWfhTlEuoaOedTH5T7Qek/edit%3Fusp%3Dsharing&strip-headers=on';
+	var url = 'https://proxy.hxlstandard.org/data.json?filter01=select&select-query01-01=%23meta%2Bid%3D'+appealid+'&url=https%3A//docs.google.com/spreadsheets/d/1rJ5gt-JaburVcfzTeNmLglEWfhTlEuoaOedTH5T7Qek/edit%3Fusp%3Dsharing&strip-headers=on';
 
 	var plusCall = $.ajax({
 		type: 'GET', 
@@ -107,7 +109,7 @@ function processHash(){
 		var hxlurl = '';
 		plusdata.forEach(function(d){
 			if(d['#meta+feature']=='override'){
-				hxlurl = 'https://beta.proxy.hxlstandard.org/data.json?strip-headers=on&url='+encodeURIComponent(d['#meta+url']);
+				hxlurl = 'https://proxy.hxlstandard.org/data.json?strip-headers=on&url='+encodeURIComponent(d['#meta+url']);
 				override = true;
 			}
 		});
