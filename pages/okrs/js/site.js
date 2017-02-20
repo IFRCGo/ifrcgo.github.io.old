@@ -23,7 +23,7 @@ function initTree(data){
 
 	// ************** Generate the tree diagram	 *****************
 	var margin = {top: 20, right: 0, bottom: 20, left: 290},
-		width = 1200 - margin.right - margin.left,
+		width = 2200 - margin.right - margin.left,
 		height = 500 - margin.top - margin.bottom;
 		
 	var i = 0,
