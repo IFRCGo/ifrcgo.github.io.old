@@ -178,7 +178,7 @@ function hxlProxyToJSON(input,headers){
 
 var dataCall = $.ajax({
 	type: "GET",
-	url: "https://proxy.hxlstandard.org/data.json?url=https%3A//docs.google.com/spreadsheets/d/1aehdzwHj04CLeSbMQV-A4Z5Hd4Le2r7QjigVGm64s-w/edit%3Fusp%3Dsharing&strip-headers=on",
+	url: "https://proxy.hxlstandard.org/data.json?url=https%3A//docs.google.com/spreadsheets/d/1Oq1oojmRjgDxt_OCQkrKk6BLG4hXFiDcKYCymmM-Iu0/edit%23gid%3D0",
 	dataType: 'json',
 	success: function(response){
 		var data = hxlProxyToJSON(response,false);
