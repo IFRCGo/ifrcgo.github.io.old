@@ -1,4 +1,4 @@
-function initTree(data){
+function initTree(id,data){
 	// create a name: node map
 	var dataMap = data.reduce(function(map, node) {
 		map[node['#meta+name']] = node;
@@ -36,7 +36,7 @@ function initTree(data){
 	var diagonal = d3.svg.diagonal()
 		.projection(function(d) { return [d.y, d.x]; });
 
-	var svg = d3.select("#tree").append("svg")
+	var svg = d3.select(id).append("svg")
 		.attr("width", width + margin.right + margin.left)
 		.attr("height", height + margin.top + margin.bottom)
 	  .append("g")
@@ -176,12 +176,22 @@ function hxlProxyToJSON(input,headers){
     return output;
 }
 
-var dataCall = $.ajax({
+$.ajax({
 	type: "GET",
-	url: "https://proxy.hxlstandard.org/data.json?strip-headers=on&url=https%3A//docs.google.com/spreadsheets/d/1Oq1oojmRjgDxt_OCQkrKk6BLG4hXFiDcKYCymmM-Iu0/edit%23gid%3D0=on&force=1",
+	url: "https://proxy.hxlstandard.org/data.json?strip-headers=on&url=https%3A//docs.google.com/spreadsheets/d/1Oq1oojmRjgDxt_OCQkrKk6BLG4hXFiDcKYCymmM-Iu0/edit%23gid%3D0=on",
 	dataType: 'json',
 	success: function(response){
 		var data = hxlProxyToJSON(response,false);
-		initTree(data);
+		initTree('#tree2017',data);
+	}
+});
+
+$.ajax({
+	type: "GET",
+	url: "https://proxy.hxlstandard.org/data.json?strip-headers=on&url=https%3A//docs.google.com/spreadsheets/d/1b15fG75FCFjo6QMAMoCn-0riDTef5GVW8U5GgrxIuUs/edit%23gid%3D0=on",
+	dataType: 'json',
+	success: function(response){
+		var data = hxlProxyToJSON(response,false);
+		initTree('#treeq1',data);
 	}
 });
