@@ -314,17 +314,24 @@ function createPie(id,width,inner,percent,percentsoft){
 	if(percentsoft>0){
 		svg.append("text")
 			.attr("x",width/2)
-			.attr("y",width/2-10)
+			.attr("y",width/2-25)
 			.text('Hard: '+d3.format(".0%")(percent))
 			.style("text-anchor", "middle")
 			.attr("class","keyfiguresmall");
 
 		svg.append("text")
 			.attr("x",width/2)
-			.attr("y",width/2+20)
-			.text('Soft: '+d3.format(".0%")(percentsoft))
+			.attr("y",width/2+5)
+			.text('Soft: '+d3.format(".0%")(percentsoft-percent))
 			.style("text-anchor", "middle")
-			.attr("class","keyfiguresmall");	
+			.attr("class","keyfiguresmall");
+
+		svg.append("text")
+			.attr("x",width/2)
+			.attr("y",width/2+35)
+			.text('Total: '+d3.format(".0%")(percentsoft))
+			.style("text-anchor", "middle")
+			.attr("class","keyfiguresmall");				
 	} else {
 		svg.append("text")
 			.attr("x",width/2)
